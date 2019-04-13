@@ -24,8 +24,6 @@ def main():
                can also use this to project the best-, worst-, and expected-case
                outcomes of the remaining games in the league.
 """
-    parser.add_argument("data_directory", action="store",
-                        help="Path to store/retrieve league data.")
     subparsers = parser.add_subparsers(dest="mode", help=htext)
 
     sub_set_line = subparsers.add_parser("set_line", description="")
@@ -43,8 +41,10 @@ def main():
     sub_standings = subparsers.add_parser("standings", description="")
     sub_standings.set_defaults(func=standings)
 
-    parser.parse_args()
+    inps = parser.parse_args()
+    inps.func(**vars(inps))
 
 
 if __name__ == "__main__":
     main()
+
