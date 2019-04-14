@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 from argparse import ArgumentParser
+import sys
 
 from nbaou.startup import set_line, set_teams, set_draft, draft
 from nbaou.reporting import standings
@@ -42,7 +43,11 @@ def main():
     sub_standings.set_defaults(func=standings)
 
     inps = parser.parse_args()
-    inps.func(**vars(inps))
+    if len(sys.argv) < 2:
+        parser.print_help()
+        sys.exit()
+    else:
+        inps.func(**vars(inps))
 
 
 if __name__ == "__main__":
